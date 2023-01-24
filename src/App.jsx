@@ -148,7 +148,15 @@ export default function App() {
             </div>
           ) : (
             <div className="noUser">
-              <h2>{playerName ? "No Players Found" : "Life is like Chess"}</h2>
+              <h2>
+                {playerName ? (
+                  <div class="loader">
+                    <div class="chess-icon"></div>
+                  </div>
+                ) : (
+                  "Life is like Chess"
+                )}
+              </h2>
             </div>
           )}
         </main>
