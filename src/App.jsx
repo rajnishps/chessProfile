@@ -47,38 +47,16 @@ export default function App() {
     }
     return highest
   }
-  const wins = () => {
-    let wins = 0
+  const stats = (what) => {
+    let stat = 0
     for (let i in playerStats) {
       for (let j in playerStats[i].record) {
         if (playerStats[i].record) {
-          wins += playerStats[i].record.win
+          stat += playerStats[i].record.what
         }
       }
     }
-    return wins
-  }
-  const draw = () => {
-    let draw = 0
-    for (let i in playerStats) {
-      for (let j in playerStats[i].record) {
-        if (playerStats[i].record) {
-          draw += playerStats[i].record.draw
-        }
-      }
-    }
-    return draw
-  }
-  const loss = () => {
-    let loss = 0
-    for (let i in playerStats) {
-      for (let j in playerStats[i].record) {
-        if (playerStats[i].record) {
-          loss = playerStats[i].record.loss
-        }
-      }
-    }
-    return loss
+    return stat
   }
 
   return (
@@ -141,9 +119,9 @@ export default function App() {
                 Highest Rating: {highestRating()}
               </h4>
               <div className="scores">
-                <span className="color-green">Wins: {wins()}</span>
-                <span className="color-white">Draw: {draw()}</span>
-                <span className="color-red">Loss:{loss()}</span>
+                <span className="color-green">Wins: {()=>stats(win)}</span>
+                <span className="color-white">Draw: {()=>stats(draw)}</span>
+                <span className="color-red">Loss:{()=>stats(loss)}</span>
               </div>
             </div>
           ) : (
