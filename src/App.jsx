@@ -106,8 +106,11 @@ export default function App() {
             <div className="userData">
               <div>
                 <div className="player-name">
+                  {playerObj.title && (
+                    <span className="title"> {playerObj.title} &nbsp;</span>
+                  )}
                   <span>{playerObj.name || "No Name"}</span>
-                  {playerObj.verified && <span>✔️</span>}
+                  {playerObj.verified && <span> &nbsp;✔️</span>}
                 </div>
                 <div>
                   {playerObj.avatar && (
@@ -119,26 +122,29 @@ export default function App() {
                   )}
                 </div>
               </div>
+              <div>
+                {playerObj.url && (
+                  <a href={playerObj.url} target="_blank">
+                    @{playerObj.username} &nbsp;
+                  </a>
+                )}
 
-              {playerObj.url && (
-                <a href={playerObj.url} target="_blank">
-                  @{playerObj.username}
-                </a>
-              )}
-              {playerObj.is_streamer && (
-                <a href={playerObj.twitch_url} target="_blank">
-                  @Twitch
-                </a>
-              )}
+                {playerObj.is_streamer && (
+                  <a href={playerObj.twitch_url} target="_blank">
+                    @Twitch
+                  </a>
+                )}
+              </div>
 
               <h4>Followers: {playerObj.followers}</h4>
-              <div>
-                <h2>Stats</h2>
-              </div>
-              <h4>Highest Rating: {highestRating()}</h4>
-              <h4>
-                Wins: {wins()} &nbsp; Draw: {draw()}&nbsp; Loss:{loss()}
+              <h4 className="highest-rating">
+                Highest Rating: {highestRating()}
               </h4>
+              <div className="scores">
+                <span className="color-green">Wins: {wins()}</span>
+                <span className="color-white">Draw: {draw()}</span>
+                <span className="color-red">Loss:{loss()}</span>
+              </div>
             </div>
           ) : (
             <div className="noUser">
