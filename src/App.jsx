@@ -119,9 +119,9 @@ export default function App() {
                 Highest Rating: {highestRating()}
               </h4>
               <div className="scores">
-                <span className="color-green">Wins: {()=>stats(win)}</span>
-                <span className="color-white">Draw: {()=>stats(draw)}</span>
-                <span className="color-red">Loss:{()=>stats(loss)}</span>
+                <span className="color-green">Wins: {stats(win)}</span>
+                <span className="color-white">Draw: {stats(draw)}</span>
+                <span className="color-red">Loss:{stats(loss)}</span>
               </div>
             </div>
           ) : (
