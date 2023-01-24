@@ -1,0 +1,28 @@
+:root {
+  --green: #2d142c;
+  --paleYellow: #510a32;
+  --darkGreen: #801336;
+  --leafGreen: #c72c41;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: "JetBrains Mono", monospace;
+}
+
+html {
+  font-size: 62.5%;
+  height: 100%;
+}
+
+body {
+  font-size: 1.6rem;
+  min-height: 100%;
+  background: var(--darkGreen);
+}
+.wrapper {
+  display: flex;
+  justify-content: center;
+}

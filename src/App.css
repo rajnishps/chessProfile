@@ -1,0 +1,91 @@
+:root {
+  --green: #61876e;
+  --paleYellow: #eae7b1;
+  --darkGreen: #3c6255;
+  --leafGreen: #a6bb8d;
+}
+
+h1 {
+  font-family: "Press Start 2P", cursive;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  min-height: fit-content;
+  padding: 2rem;
+}
+.container {
+  height: 100vh;
+  background: var(--green);
+  display: flex;
+  flex-direction: column;
+  width: 70rem;
+}
+.themeChange {
+  height: 2rem;
+}
+form {
+  display: flex;
+  margin: 2rem;
+}
+
+input {
+  width: calc(100% - 4rem);
+  outline: none;
+  border: none;
+  height: 5rem;
+  border-top-left-radius: 1.4rem;
+  border-bottom-left-radius: 1.4rem;
+  padding: 2rem;
+  background: var(--leafGreen);
+  font-size: 2rem;
+}
+input::placeholder {
+  color: black;
+}
+.bgSubmit {
+  background: var(--leafGreen);
+  border-top-right-radius: 1.4rem;
+  border-bottom-right-radius: 1.4rem;
+}
+.submitBtn {
+  margin: 0.5rem;
+  border: none;
+  outline: none;
+  height: 4rem;
+  width: 8rem;
+  font-size: 1.6rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.devAvatar {
+  height: 12rem;
+  width: 12rem;
+  border-radius: 999px;
+}
+
+.noUser {
+  display: flex;
+  justify-content: center;
+}
+
+.userData {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+.userData > * {
+  padding: 1rem;
+}
+a {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+}
+a:hover {
+  background: var(--darkGreen);
+}
