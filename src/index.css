@@ -1,8 +1,8 @@
 :root {
-  --green: #2d142c;
-  --paleYellow: #510a32;
-  --darkGreen: #801336;
-  --leafGreen: #c72c41;
+  --red: #2d142c;
+  --maroon: #510a32;
+  --darkRed: #801336;
+  --offOrange: #c72c41;
 }
 *,
 *::before,
@@ -20,7 +20,7 @@ html {
 body {
   font-size: 1.6rem;
   min-height: 100%;
-  background: var(--darkGreen);
+  background: var(--red);
 }
 .wrapper {
   display: flex;

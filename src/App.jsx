@@ -1,17 +1,16 @@
 import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form"
 import "./App.css"
-import Logo from "./assets/knight.svg"
 
 export default function App() {
   const [playerName, setPlayerName] = useState("")
   const [playerObj, setPlayerObj] = useState({})
-  console.log(playerObj)
+  const [playerStats, setPlayerStats] = useState({})
   const { register, handleSubmit } = useForm()
-  const onSubmit = (devData) => setPlayerName(devData.playerName)
+  const onSubmit = (playerData) => setPlayerName(playerData.playerName)
 
   const fetchData = () => {
-    fetch(`https://api.chess.com/pub/player/${playerName}/stats`)
+    fetch(`https://api.chess.com/pub/player/${playerName}`)
       .then((response) => {
         return response.json()
       })
@@ -21,19 +20,72 @@ export default function App() {
       .catch((error) => {
         console.log(error)
       })
+
+    fetch(`https://api.chess.com/pub/player/${playerName}/stats`)
+      .then((response) => {
+        return response.json()
+      })
+      .then((responseJson) => {
+        setPlayerStats(responseJson)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
   useEffect(() => {
     fetchData()
   }, [playerName])
+
+  const highestRating = () => {
+    let highest = 0
+    for (let i in playerStats) {
+      for (let j in playerStats[i].best) {
+        if (playerStats[i].best.rating > highest) {
+          highest = playerStats[i].best.rating
+        }
+      }
+    }
+    return highest
+  }
+  const wins = () => {
+    let wins = 0
+    for (let i in playerStats) {
+      for (let j in playerStats[i].record) {
+        if (playerStats[i].record) {
+          wins += playerStats[i].record.win
+        }
+      }
+    }
+    return wins
+  }
+  const draw = () => {
+    let draw = 0
+    for (let i in playerStats) {
+      for (let j in playerStats[i].record) {
+        if (playerStats[i].record) {
+          draw += playerStats[i].record.draw
+        }
+      }
+    }
+    return draw
+  }
+  const loss = () => {
+    let loss = 0
+    for (let i in playerStats) {
+      for (let j in playerStats[i].record) {
+        if (playerStats[i].record) {
+          loss = playerStats[i].record.loss
+        }
+      }
+    }
+    return loss
+  }
 
   return (
     <div className="wrapper">
       <div className="container">
         <header>
           <h1>Chess Stats</h1>
-          <div>
-            <img className="themeChange" src={Logo} alt="logo" />
-          </div>
         </header>
         <main>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -50,42 +102,47 @@ export default function App() {
               </button>
             </div>
           </form>
-          {playerObj.id ? (
+          {playerObj.player_id ? (
             <div className="userData">
-              <h2>{playerObj.name || "'No Name'"}</h2>
               <div>
-                <img
-                  className="devAvatar"
-                  src={playerObj.avatar_url}
-                  alt={playerObj.name}
-                />
+                <div className="player-name">
+                  <span>{playerObj.name || "No Name"}</span>
+                  {playerObj.verified && <span>✔️</span>}
+                </div>
+                <div>
+                  {playerObj.avatar && (
+                    <img
+                      className="devAvatar"
+                      src={playerObj.avatar}
+                      alt={playerObj.name}
+                    />
+                  )}
+                </div>
               </div>
-              {playerObj.location && <h3>{playerObj.location}</h3>}
-              <h3>Joined: {new Date(playerObj.created_at).toDateString()}</h3>
 
-              <a href={playerObj.html_url} target="_blank">
-                @{playerObj.login}
-              </a>
-              {playerObj.twitter_username && (
-                <a
-                  href={`https://twitter.com/${playerObj.twitter_username}`}
-                  target="_blank"
-                >
-                  @{playerObj.twitter_username}
+              {playerObj.url && (
+                <a href={playerObj.url} target="_blank">
+                  @{playerObj.username}
                 </a>
               )}
-              {playerObj.blog && (
-                <a href={playerObj.blog} target="_blank">
-                  Website
+              {playerObj.is_streamer && (
+                <a href={playerObj.twitch_url} target="_blank">
+                  @Twitch
                 </a>
               )}
-              <h4>Public Repo: {playerObj.public_repos}</h4>
+
               <h4>Followers: {playerObj.followers}</h4>
-              <h4>Following: {playerObj.following}</h4>
+              <div>
+                <h2>Stats</h2>
+              </div>
+              <h4>Highest Rating: {highestRating()}</h4>
+              <h4>
+                Wins: {wins()} &nbsp; Draw: {draw()}&nbsp; Loss:{loss()}
+              </h4>
             </div>
           ) : (
             <div className="noUser">
-              <h2>{playerName ? "No User Found" : "In search of Devs"}</h2>
+              <h2>{playerName ? "No Players Found" : "Life is like Chess"}</h2>
             </div>
           )}
         </main>

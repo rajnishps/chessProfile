@@ -1,14 +1,20 @@
 :root {
-  --green: #61876e;
-  --paleYellow: #eae7b1;
-  --darkGreen: #3c6255;
-  --leafGreen: #a6bb8d;
+  --red: #2d142c;
+  --maroon: #510a32;
+  --darkRed: #801336;
+  --offOrange: #c72c41;
 }
 
 h1 {
-  font-family: "Press Start 2P", cursive;
+  font-size: 4rem;
+  letter-spacing: 1rem;
+  text-transform: uppercase;
 }
-
+.player-name {
+  font-weight: bold;
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
 header {
   display: flex;
   justify-content: space-between;
@@ -17,7 +23,7 @@ header {
 }
 .container {
   height: 100vh;
-  background: var(--green);
+  background: var(--darkRed);
   display: flex;
   flex-direction: column;
   width: 70rem;
@@ -38,14 +44,14 @@ input {
   border-top-left-radius: 1.4rem;
   border-bottom-left-radius: 1.4rem;
   padding: 2rem;
-  background: var(--leafGreen);
+  background: var(--offOrange);
   font-size: 2rem;
 }
 input::placeholder {
   color: black;
 }
 .bgSubmit {
-  background: var(--leafGreen);
+  background: var(--offOrange);
   border-top-right-radius: 1.4rem;
   border-bottom-right-radius: 1.4rem;
 }
@@ -87,5 +93,5 @@ a {
   color: rgb(0, 0, 0);
 }
 a:hover {
-  background: var(--darkGreen);
+  background: var(--red);
 }
