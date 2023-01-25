@@ -90,7 +90,7 @@ export default function App() {
                     <span className="title"> {playerObj.title} &nbsp;</span>
                   )}
                   <span>{playerObj.name || "No Name"}</span>
-                  {playerObj.verified && <span> &nbsp;✔️</span>}
+                  {playerObj.verified && <span>✔️</span>}
                 </div>
                 <div>
                   {playerObj.avatar && (
