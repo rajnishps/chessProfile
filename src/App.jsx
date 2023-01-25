@@ -10,6 +10,8 @@ export default function App() {
   const onSubmit = (playerData) => setPlayerName(playerData.playerName)
 
   const fetchData = () => {
+    setPlayerObj({})
+    setPlayerStats({})
     fetch(`https://api.chess.com/pub/player/${playerName}`)
       .then((response) => {
         return response.json()
@@ -47,12 +49,12 @@ export default function App() {
     }
     return highest
   }
-  const stats = (what) => {
+  const getStat = (which) => {
     let stat = 0
     for (let i in playerStats) {
       for (let j in playerStats[i].record) {
         if (playerStats[i].record) {
-          stat += playerStats[i].record.what
+          stat += playerStats[i].record[which]
         }
       }
     }
@@ -93,13 +95,15 @@ export default function App() {
                 <div>
                   {playerObj.avatar && (
                     <img
-                      className="devAvatar"
+                      className="avatar"
                       src={playerObj.avatar}
                       alt={playerObj.name}
                     />
                   )}
                 </div>
               </div>
+              <h4 className="followers">{playerObj.location}</h4>
+              <h4 className="followers">Followers: {playerObj.followers}</h4>
               <div>
                 {playerObj.url && (
                   <a href={playerObj.url} target="_blank">
@@ -114,14 +118,13 @@ export default function App() {
                 )}
               </div>
 
-              <h4>Followers: {playerObj.followers}</h4>
               <h4 className="highest-rating">
                 Highest Rating: {highestRating()}
               </h4>
               <div className="scores">
-                <span className="color-green">Wins: {stats(win)}</span>
-                <span className="color-white">Draw: {stats(draw)}</span>
-                <span className="color-red">Loss:{stats(loss)}</span>
+                <span className="color-green">Wins: {getStat("win")}</span>
+                <span className="color-white">Draw: {getStat("draw")}</span>
+                <span className="color-red">Loss:{getStat("loss")}</span>
               </div>
             </div>
           ) : (
