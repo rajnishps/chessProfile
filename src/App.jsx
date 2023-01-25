@@ -50,15 +50,15 @@ export default function App() {
     return highest
   }
   const getStat = (which) => {
-    let stat = 0
+    let stats = 0
     for (let i in playerStats) {
       for (let j in playerStats[i].record) {
         if (playerStats[i].record) {
-          stat += playerStats[i].record[which]
+          stats += playerStats[i].record[which]
         }
       }
     }
-    return stat
+    return stats
   }
 
   return (
